@@ -1,0 +1,150 @@
+\documentclass[12pt, a5paper]{book}
+
+% --- 1. Шрифты, кодировки и язык ---
+\usepackage[T1,T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+\usepackage{cmap}      % поиск в PDF
+
+% --- 2. Геометрия страницы и форматирование ---
+\usepackage{extsizes} % Возможность сделать 14-й шрифт
+\usepackage[a5paper,hmargin=1cm,vmargin=1cm]{geometry}
+\usepackage{setspace} % Интерлиньяж
+\usepackage{secdot}
+\usepackage{multicol}
+\usepackage{paralist}
+\usepackage{fontawesome5}
+\usepackage{marginnote}
+\usepackage{remreset}
+
+% --- 3. Математика ---
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая
+\usepackage[e]{esvect}
+
+% --- 4. Графика и таблицы ---
+\usepackage{graphicx}   % Для вставки рисунков
+\usepackage{wrapfig}    % Обтекание рисунков текстом
+\usepackage[usenames,dvipsnames,svgnames,table,rgb]{xcolor}
+\usepackage{array,tabularx,tabulary,booktabs} % Таблицы
+\usepackage{ltablex}
+\usepackage{multirow}
+\setlength{\extrarowheight}{2pt}
+\usepackage{subcaption}
+\usepackage{ytableau}
+\usepackage{pdfpages}
+\usepackage{tikz}       % Графика
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+
+% --- 5. Прочее ---
+\usepackage{answers}
+\usepackage{etoolbox} % логические операторы
+\usepackage{csquotes}
+
+% --- ЗАМЕНА enumerate НА enumitem ДЛЯ РАМОЧЕК ---
+% Удален старый пакет enumerate, добавлен enumitem
+\usepackage[shortlabels]{enumitem}
+
+% Настройка списка enumerate:
+% Level 1 (цифры): в рамочке, жирные
+\setlist[enumerate,1]{
+    label={\fbox{\bfseries\arabic*}}, % Рамка вокруг жирной цифры
+    leftmargin=*,      % Выравнивание по левому краю
+    labelsep=0.5em     % Отступ от рамки до текста
+}
+% Level 2 (буквы): без изменений (или можно настроить явно)
+\setlist[enumerate,2]{
+    label={\alph*},    % Просто буквы a, b...
+    leftmargin=*
+}
+% ------------------------------------------------
+
+\newcommand{\kratno}{\mathrel{\substack{\cdot\\[-0.2ex]\cdot\\[-0.2ex]\cdot}}}
+
+\usepackage{tabularx} % Для окружения tabularx и типа столбца X
+\usepackage{multirow} % Для команды \multirow
+\usepackage{array} 
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}} 
+\setlength{\extrarowheight}{3pt} % Увеличивает высоту всех строк
+\newcommand{\RowHeight}{1cm}
+
+% --- 6. Гиперссылки (ЗАГРУЖАТЬ ПОСЛЕДНИМ) ---
+\usepackage{hyperref}
+\hypersetup{
+    unicode=true,
+    pdftitle={Заголовок},
+    pdfauthor={Автор},
+    pdfsubject={Тема},
+    colorlinks=true,
+    allcolors=blue % Устанавливает синий цвет для ВСЕХ ссылок
+}
+
+% enumitem уже загружен выше, повтор enumitem удален, чтобы не было конфликтов
+% \usepackage{enumitem} 
+
+% --- Команды для переключения цвета ссылок ---
+\newcommand{\BlueLinks}{\hypersetup{allcolors=blue}}
+\newcommand{\BlackLinks}{\hypersetup{allcolors=black}}
+\pagestyle{empty}
+\renewcommand{\arraystretch}{1.5} % Увеличивает высоту строк в таблицах
+
+\usepackage{titlesec}
+
+% Настройка заголовка главы
+\titleformat{\chapter}[hang]
+  {\normalfont\large\bfseries\scshape} % \Large примерно в 2 раза меньше стандартного \Huge
+  {}                                   % Пустые скобки убирают "Глава 1"
+  {0pt}                                % Отступ между номером и текстом (0, т.к. номера нет)
+  {}
+
+% Настройка отступов (убираем гигантское пустое поле сверху страницы)
+\titlespacing*{\chapter}
+  {0pt}    % Отступ слева
+  {-20pt}  % Отступ сверху (отрицательный, чтобы поднять заголовок выше)
+  {20pt}   % Отступ снизу (до текста)
+
+  % Настройка параграфа (section)
+\titleformat{\section}
+  {\normalfont\normalsize\bfseries} % \normalsize — это размер обычного текста
+  {}                                % Пустые скобки убирают нумерацию (1.1, 1.2 и т.д.)
+  {0pt}                             % Отступ между номером и текстом (здесь 0)
+  {}
+
+% Настройка отступов для section (чтобы не было лишних дырок)
+\titlespacing*{\section}
+  {0pt}        % Отступ слева
+  {2.5ex}      % Отступ сверху
+  {1.5ex}      % Отступ снизу
+
+\usepackage{tocloft}
+
+% Убираем номера страниц для глав (chapter)
+\addtocontents{toc}{\cftpagenumbersoff{chapter}}
+
+% Убираем номера страниц для параграфов (section)
+\addtocontents{toc}{\cftpagenumbersoff{section}}
+
+% Если хочешь убрать и точки (от заглавия до бывшего номера)
+\renewcommand{\cftdotsep}{\cftnodots}
+
+ \begin{document}
+
+ \tableofcontents % Добавляет оглавление
+ \newpage         % Начать новую страницу после оглавления
+
+ %\maketitle
+ 
+ %\makeatletter \setlength{\@fptop}{0pt} \makeatother
+ 
+ \Opensolutionfile{solutionfile}
+ \Opensolutionfile{answerfile}
+
+\input{2026_geom/1_triangle inequality.tex}
+
+\newpage
+
+\input{2026_geom/2_exterior_angle.tex}
+
+ \end{document}
